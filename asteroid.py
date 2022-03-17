@@ -1,4 +1,3 @@
-
 class Asteroid:
     """
     Handles the data for an asteroid
@@ -19,3 +18,4 @@ class Asteroid:
         self.pos_x -= 1
 
         return (self.pos_x, self.pos_y)
+        

@@ -1,7 +1,12 @@
-import game
+"""
+Main File -> Entry point
+"""
+
+from game import Game
 
 def main():
-    pass
+    game = Game()
+    game.play()
 
 if __name__ == "init":
     main()
