@@ -2,12 +2,10 @@ class Asteroid:
     """
     Handles the data for an asteroid
     """
-    
-    pos_x = 7
-    pos_y
 
     def __init__(self, pos_y):
         self.pos_y = pos_y
+        self.pos_x = 7
 
     def update_pos(self):
         """
@@ -18,4 +16,3 @@ class Asteroid:
         self.pos_x -= 1
 
         return (self.pos_x, self.pos_y)
-        
