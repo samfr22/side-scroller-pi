@@ -3,13 +3,13 @@ Holds information about current game information and handles when to update the
 game state
 """
 
+import random
+import math
 import PCF8591 as ADC
 import LCD1602 as LCD
 import senseLED as LED
 from asteroid import Asteroid
 from player import Player
-import random
-import math
 
 class Game:
     """
@@ -62,7 +62,7 @@ class Game:
         asteroid_gen_speed_decrease = 0.0
         next_asteroid = 0
         skip_update = False
-        
+
         last_pos = (0, 0)
         last_potential = 0
 
@@ -95,7 +95,7 @@ class Game:
                 # Reset scoring information and slow asteroid generation speed
                 score_multiplier = self.BASE_SCORE_MULTIPLIER
                 next_asteroid_time = self.ASTEROID_BASE_GEN_SPEED * self.LOOP_RATE
-                
+
                 self.player.num_lives -= 1
                 if self.player.num_lives <= 0:
                     # Game over
@@ -132,7 +132,6 @@ class Game:
             self.score = self.score + (score_multiplier * potentiometer_mult)
             LCD.write(0, 0, ("Score: %s" % (str(math.floor(self.score)))))
 
-
     def collision_detection(self):
         """
         Handles checking the position of the player against the position of any
@@ -147,7 +146,6 @@ class Game:
 
         return False
 
-
     def print_display(self):
         """
         Debugging method while unable to use senseHAT at same time as inputs
@@ -158,6 +156,10 @@ class Game:
             print()
 
     def set_display_point(self, x, y, marker):
+        """
+        Helper method to manage calling the LED matrix and maintaining the
+        debugging display at the same time
+        """
         self.display[x][y] = marker
         if marker == '_':
             LED.set_pixel(x, y, self.back_color)
