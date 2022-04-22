@@ -20,30 +20,22 @@ class Player:
     def move(self):
         """
         Method to handle the player's movement of the joystick and update their
-        position accordingly to the game
+        position accordingly to the game. Needs to be inverted in the vertical 
+        posiition due to the behavior of the LED
         """
         vert_reading = ADC.read(0)
-        if vert_reading <= 30 and self.pos_y > 0:
-            # Up
-            self.pos_y -= 1
-            print("Up")
-        elif vert_reading >= 225 and self.pos_y < 7:
+        if vert_reading <= 30 and self.pos_y < 7:
             # Down
             self.pos_y += 1
-            print("Down")
+        elif vert_reading >= 225 and self.pos_y > 0:
+            # Up
+            self.pos_y -= 1
         hoz_reading = ADC.read(1)
         if hoz_reading >= 225 and self.pos_x > 0:
             # Left
             self.pos_x -= 1
-            print("Left")
         elif hoz_reading <= 30 and self.pos_x < 7:
             # Right
             self.pos_x += 1
-            print("Right")
-
-        pressed = ADC.read(2)
-        if pressed <= 30:
-            # TODO: Shooting mechanic?
-            pass
         
         return (self.pos_x, self.pos_y)
